@@ -24,6 +24,18 @@ export default defineStaticConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        defaultItem: () => {
+          return {
+              author: "{{your name here}}",
+              date: new Date().toLocaleDateString("en"),
+              draft: false
+          }
+        },
+        ui: {
+          filename: {
+            readonly: true,
+          },
+        },
         fields: [
           {
             type: "string",
@@ -31,6 +43,49 @@ export default defineStaticConfig({
             label: "Title",
             isTitle: true,
             required: true,
+          },
+          {
+            type: "string",
+            name: "author",
+            label: "Author",
+          },
+          {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+          },
+          {
+            type: "boolean",
+            name: "draft",
+            label: "Draft",
+          },
+          {
+            type: 'string',
+            name: 'tags',
+            label: 'Tags',
+            list: true,
+          },
+          {
+            type: 'object',
+            name: 'cover',
+            label: 'Cover image',
+            fields: [
+                {
+                    type: 'image',
+                    name: 'image',
+                    label: 'Image',
+                },
+                {
+                    type: 'string',
+                    name: 'alt',
+                    label: 'Alternative text',
+                },
+                {
+                    type: 'string',
+                    name: 'caption',
+                    label: 'Caption',
+                },
+            ]
           },
           {
             type: "rich-text",
